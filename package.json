@@ -1,0 +1,23 @@
+{
+  "name": "ssrl",
+  "version": "1.0.0",
+  "description": "structured scripture reference language parser in javascript",
+  "main": "index.js",
+  "dependencies": {
+    "jison": "^0.4.18",
+    "npm": "^6.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test.js"
+  },
+  "keywords": [
+    "bible",
+    "scripture",
+    "reference",
+    "json",
+    "parser"
+  ],
+  "author": "",
+  "license": "MIT"
+}
