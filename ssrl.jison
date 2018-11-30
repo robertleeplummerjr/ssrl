@@ -22,6 +22,11 @@
     this.popState();
     return 'COMMA';
   }
+<CHAPTER>[-](?=[\s]*[0-9]+[\s]*[:])
+  {
+    this.popState();
+    return 'DASH';
+  }
 <CHAPTER>[,]
   return 'VERSE_COMMA'
 <CHAPTER>[-]
@@ -79,7 +84,9 @@ CHAPTERS
   | NUMBER DASH
     { $$ = [{ chapter: parseInt($1) }]; }
   | NUMBER DASH NUMBER
-    { $$ = [{ start: parseInt($1), end: parseInt($3) }]; }
+    { $$ = [{ start: { chapter: parseInt($1) }, end: { chapter: parseInt($3) } }]; }
+  | NUMBER COLON VERSES DASH NUMBER COLON VERSES
+    { $$ = [{ start: { chapter: parseInt($1), verses: $3 }, end: { chapter: parseInt($5), verses: $7 } }]; }
   | CHAPTERS COMMA
     { $$ = $1; }
   | CHAPTERS COMMA NUMBER
@@ -90,8 +97,8 @@ CHAPTERS
     { $$ = $1.concat({ chapter: parseInt($3), verses: $5 }); }
   | CHAPTERS COMMA NUMBER DASH
     { $$ = $1.concat({ chapter: parseInt($3) }); }
-  | CHAPTERS COMMA NUMBER DASH NUMBER  
-    { $$ = $1.concat({ start: parseInt($3), end: parseInt($5) }); }
+  | CHAPTERS COMMA NUMBER DASH NUMBER
+    { $$ = $1.concat({ start: { chapter: parseInt($3) }, end: { chapter: parseInt($5) } }); }
   ;
 
 VERSES
@@ -111,5 +118,5 @@ VERSE_RANGE
   : VERSE_NUMBER VERSE_DASH
     { $$ = { verse: parseInt($1) }; }
   | VERSE_NUMBER VERSE_DASH VERSE_NUMBER
-    { $$ = { start: parseInt($1), end: parseInt($3) }; }
+    { $$ = { start: { verse: parseInt($1) }, end: { verse: parseInt($3) } }; }
   ;

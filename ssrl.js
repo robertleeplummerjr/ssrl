@@ -72,12 +72,12 @@
   }
 */
 var ssrl = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,4],$V1=[5,7],$V2=[5,7,14],$V3=[1,16],$V4=[1,20],$V5=[5,7,14,17],$V6=[1,21];
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,4],$V1=[5,7],$V2=[5,7,14],$V3=[1,16],$V4=[1,21],$V5=[5,7,13,14,17],$V6=[1,22];
 var parser = {trace: function trace() { },
 yy: {},
 symbols_: {"error":2,"LIST":3,"SCRIPTURES":4,"EOF":5,"SCRIPTURE":6,"SEMICOLON":7,"NAME":8,"CHAPTERS":9,"NUMBER":10,"COLON":11,"VERSES":12,"DASH":13,"COMMA":14,"VERSE_RANGE":15,"VERSE_NUMBER":16,"VERSE_COMMA":17,"VERSE_DASH":18,"$accept":0,"$end":1},
 terminals_: {2:"error",5:"EOF",7:"SEMICOLON",8:"NAME",10:"NUMBER",11:"COLON",13:"DASH",14:"COMMA",16:"VERSE_NUMBER",17:"VERSE_COMMA",18:"VERSE_DASH"},
-productions_: [0,[3,2],[4,1],[4,2],[4,3],[6,2],[9,1],[9,2],[9,3],[9,2],[9,3],[9,2],[9,3],[9,4],[9,5],[9,4],[9,5],[12,1],[12,1],[12,2],[12,3],[12,3],[15,2],[15,3]],
+productions_: [0,[3,2],[4,1],[4,2],[4,3],[6,2],[9,1],[9,2],[9,3],[9,2],[9,3],[9,7],[9,2],[9,3],[9,4],[9,5],[9,4],[9,5],[12,1],[12,1],[12,2],[12,3],[12,3],[15,2],[15,3]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
@@ -86,13 +86,13 @@ switch (yystate) {
 case 1:
  return $$[$0-1]; 
 break;
-case 2: case 17:
+case 2: case 18:
  this.$ = [$$[$0]]; 
 break;
-case 3: case 11: case 19:
+case 3: case 12: case 20:
  this.$ = $$[$0-1]; 
 break;
-case 4: case 20:
+case 4: case 21:
  this.$ = $$[$0-2].concat($$[$0]); 
 break;
 case 5:
@@ -108,35 +108,38 @@ case 8:
  this.$ = [{ chapter: parseInt($$[$0-2]), verses: $$[$0] }]; 
 break;
 case 10:
- this.$ = [{ start: parseInt($$[$0-2]), end: parseInt($$[$0]) }]; 
+ this.$ = [{ start: { chapter: parseInt($$[$0-2]) }, end: { chapter: parseInt($$[$0]) } }]; 
 break;
-case 12:
+case 11:
+ this.$ = [{ start: { chapter: parseInt($$[$0-6]), verses: $$[$0-4] }, end: { chapter: parseInt($$[$0-2]), verses: $$[$0] } }]; 
+break;
+case 13:
  this.$ = $$[$0-2].concat({ chapter: parseInt($$[$0]) }); 
 break;
-case 13: case 15:
+case 14: case 16:
  this.$ = $$[$0-3].concat({ chapter: parseInt($$[$0-1]) }); 
 break;
-case 14:
+case 15:
  this.$ = $$[$0-4].concat({ chapter: parseInt($$[$0-2]), verses: $$[$0] }); 
 break;
-case 16:
- this.$ = $$[$0-4].concat({ start: parseInt($$[$0-2]), end: parseInt($$[$0]) }); 
+case 17:
+ this.$ = $$[$0-4].concat({ start: { chapter: parseInt($$[$0-2]) }, end: { chapter: parseInt($$[$0]) } }); 
 break;
-case 18:
+case 19:
  this.$ = [{ verse: parseInt($$[$0]) }]; 
 break;
-case 21:
+case 22:
  this.$ = $$[$0-2].concat({ verse: parseInt($$[$0]) }); 
 break;
-case 22:
+case 23:
  this.$ = { verse: parseInt($$[$0-1]) }; 
 break;
-case 23:
- this.$ = { start: parseInt($$[$0-2]), end: parseInt($$[$0]) }; 
+case 24:
+ this.$ = { start: { verse: parseInt($$[$0-2]) }, end: { verse: parseInt($$[$0]) } }; 
 break;
 }
 },
-table: [{3:1,4:2,6:3,8:$V0},{1:[3]},{5:[1,5],7:[1,6]},o($V1,[2,2]),{9:7,10:[1,8]},{1:[2,1]},o($V1,[2,3],{6:9,8:$V0}),o($V1,[2,5],{14:[1,10]}),o($V2,[2,6],{11:[1,11],13:[1,12]}),o($V1,[2,4]),o($V2,[2,11],{10:[1,13]}),o($V2,[2,7],{12:14,15:15,16:$V3}),o($V2,[2,9],{10:[1,17]}),o($V2,[2,12],{11:[1,18],13:[1,19]}),o($V2,[2,8],{17:$V4}),o($V5,[2,17]),o($V5,[2,18],{18:$V6}),o($V2,[2,10]),o($V2,[2,13],{15:15,12:22,16:$V3}),o($V2,[2,15],{10:[1,23]}),o($V5,[2,19],{15:24,16:[1,25]}),o($V5,[2,22],{16:[1,26]}),o($V2,[2,14],{17:$V4}),o($V2,[2,16]),o($V5,[2,20]),o($V5,[2,21],{18:$V6}),o($V5,[2,23])],
+table: [{3:1,4:2,6:3,8:$V0},{1:[3]},{5:[1,5],7:[1,6]},o($V1,[2,2]),{9:7,10:[1,8]},{1:[2,1]},o($V1,[2,3],{6:9,8:$V0}),o($V1,[2,5],{14:[1,10]}),o($V2,[2,6],{11:[1,11],13:[1,12]}),o($V1,[2,4]),o($V2,[2,12],{10:[1,13]}),o($V2,[2,7],{12:14,15:15,16:$V3}),o($V2,[2,9],{10:[1,17]}),o($V2,[2,13],{11:[1,18],13:[1,19]}),o($V2,[2,8],{13:[1,20],17:$V4}),o($V5,[2,18]),o($V5,[2,19],{18:$V6}),o($V2,[2,10]),o($V2,[2,14],{15:15,12:23,16:$V3}),o($V2,[2,16],{10:[1,24]}),{10:[1,25]},o($V5,[2,20],{15:26,16:[1,27]}),o($V5,[2,23],{16:[1,28]}),o($V2,[2,15],{17:$V4}),o($V2,[2,17]),{11:[1,29]},o($V5,[2,21]),o($V5,[2,22],{18:$V6}),o($V5,[2,24]),{12:30,15:15,16:$V3},o($V2,[2,11],{17:$V4})],
 defaultActions: {5:[2,1]},
 parseError: function parseError(str, hash) {
     if (hash.recoverable) {
@@ -628,31 +631,36 @@ case 4:
     return 14;
   
 break;
-case 5:return 17
+case 5:
+    this.popState();
+    return 13;
+  
 break;
-case 6:return 18
+case 6:return 17
 break;
-case 7:return 16
+case 7:return 18
 break;
-case 8:return 10
+case 8:return 16
 break;
-case 9:
+case 9:return 10
+break;
+case 10:
     this.begin('CHAPTER');
     return 11;
   
 break;
-case 10:return 7
+case 11:return 7
 break;
-case 11:return 14
+case 12:return 14
 break;
-case 12:return 13
+case 13:return 13
 break;
-case 13:return 5
+case 14:return 5
 break;
 }
 },
-rules: [/^(?:[\s]+)/,/^(?:[0-4][\s]+[a-zA-Z]+[.]?)/,/^(?:[a-zA-Z]+[.]?)/,/^(?:[;])/,/^(?:[,](?=[\s]*[0-9]+[\s]*[:]))/,/^(?:[,])/,/^(?:[-])/,/^(?:[0-9]+)/,/^(?:[0-9]+)/,/^(?:[:])/,/^(?:[;])/,/^(?:[,])/,/^(?:[-])/,/^(?:$)/],
-conditions: {"CHAPTER":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13],"inclusive":true},"INITIAL":{"rules":[0,1,2,8,9,10,11,12,13],"inclusive":true}}
+rules: [/^(?:[\s]+)/,/^(?:[0-4][\s]+[a-zA-Z]+[.]?)/,/^(?:[a-zA-Z]+[.]?)/,/^(?:[;])/,/^(?:[,](?=[\s]*[0-9]+[\s]*[:]))/,/^(?:[-](?=[\s]*[0-9]+[\s]*[:]))/,/^(?:[,])/,/^(?:[-])/,/^(?:[0-9]+)/,/^(?:[0-9]+)/,/^(?:[:])/,/^(?:[;])/,/^(?:[,])/,/^(?:[-])/,/^(?:$)/],
+conditions: {"CHAPTER":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14],"inclusive":true},"INITIAL":{"rules":[0,1,2,9,10,11,12,13,14],"inclusive":true}}
 });
 return lexer;
 })();
