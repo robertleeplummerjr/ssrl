@@ -12,6 +12,11 @@
   return 'NAME'
 [a-zA-Z]+[.]?
   return 'NAME'
+<CHAPTER>[;](?=[\s]*[0-9]+[\s]*[:])
+  {
+    this.popState();
+    return 'CHAPTER_SEMICOLON';
+  }  
 <CHAPTER>[;]
   {
     this.popState();
@@ -98,6 +103,18 @@ CHAPTERS
   | CHAPTERS COMMA NUMBER DASH
     { $$ = $1.concat({ chapter: parseInt($3) }); }
   | CHAPTERS COMMA NUMBER DASH NUMBER
+    { $$ = $1.concat({ start: { chapter: parseInt($3) }, end: { chapter: parseInt($5) } }); }
+  | CHAPTERS CHAPTER_SEMICOLON
+    { $$ = $1; }
+  | CHAPTERS CHAPTER_SEMICOLON NUMBER
+    { $$ = $1.concat({ chapter: parseInt($3) }); }
+  | CHAPTERS CHAPTER_SEMICOLON NUMBER COLON
+    { $$ = $1.concat({ chapter: parseInt($3) }); }
+  | CHAPTERS CHAPTER_SEMICOLON NUMBER COLON VERSES
+    { $$ = $1.concat({ chapter: parseInt($3), verses: $5 }); }
+  | CHAPTERS CHAPTER_SEMICOLON NUMBER DASH
+    { $$ = $1.concat({ chapter: parseInt($3) }); }
+  | CHAPTERS CHAPTER_SEMICOLON NUMBER DASH NUMBER
     { $$ = $1.concat({ start: { chapter: parseInt($3) }, end: { chapter: parseInt($5) } }); }
   ;
 
