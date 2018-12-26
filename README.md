@@ -25,6 +25,7 @@ output [{ book: 'Gen', chapters: [{ chapter: 3, verses: [{ verse: 16 }] }] }]
 * Verse - "Gen 3:16"
 * Verses - "Gen 3:16,18"
 * Verse ranges - "Gen 3:16-18"
+* Repeating references - "Gen 3:16-18; Rev 21:3,4" (note: repeat without limit)
 * Different use case? Find bugs and open issues!
 
 ## json structures
