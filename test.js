@@ -15,12 +15,13 @@ assert.deepEqual(ssrl.parse('Gen. 1-2'),[{ book: 'Gen.', chapters: [{ start: { c
 assert.deepEqual(ssrl.parse('Gen. 1-2, 5'),[{ book: 'Gen.', chapters: [{ start: { chapter: 1 }, end: { chapter: 2 } }, { chapter: 5 }] }]);
 assert.deepEqual(ssrl.parse('Gen 1, 2:4'), [{ book: 'Gen', chapters: [{ chapter: 1 }, { chapter: 2, verses: [{ verse: 4 }] }] }]);
 assert.deepEqual(ssrl.parse('Gen 1:2, 2:4'), [{ book: 'Gen', chapters: [{ chapter: 1, verses: [{ verse: 2 }] }, { chapter: 2, verses: [{ verse: 4 }] }] }]);
-assert.deepEqual(ssrl.parse('2 Timothy 1:2, 2:4'), [{ book: '2 Timothy', chapters: [{ chapter: 1, verses: [{ verse: 2 }] }, { chapter: 2, verses: [{ verse: 4 }] }] }]);
-assert.deepEqual(ssrl.parse('2 Timothy 1:2 - 2:4'), [{ book: '2 Timothy', chapters: [{ start: { chapter: 1, verses: [{ verse: 2 }] }, end: { chapter: 2, verses: [{ verse: 4 }] } }] }]);
-assert.deepEqual(ssrl.parse('1 Corinthians 3:6, 7, 9'), [{ book: '1 Corinthians', chapters: [{ chapter: 3, verses: [{ verse: 6 }, { verse: 7 }, { verse: 9 }] }]}]);
-assert.deepEqual(ssrl.parse('1 Corinthians 9:20-23'), [{ book: '1 Corinthians', chapters: [{ chapter: 9, verses: [{ start: { verse: 20 }, end: { verse: 23 }}] }] }]);
-assert.deepEqual(ssrl.parse('Micah 6:8; 1 Corinthians 10:31'), [{ book: 'Micah', chapters: [{ chapter: 6, verses: [{ verse: 8 }] }] }, { book: '1 Corinthians', chapters: [{ chapter: 10, verses: [{ verse: 31 }] }] }]);
+assert.deepEqual(ssrl.parse('2 Timothy 1:2, 2:4'), [{ number: 2, book: 'Timothy', chapters: [{ chapter: 1, verses: [{ verse: 2 }] }, { chapter: 2, verses: [{ verse: 4 }] }] }]);
+assert.deepEqual(ssrl.parse('2 Timothy 1:2 - 2:4'), [{ number: 2, book: 'Timothy', chapters: [{ start: { chapter: 1, verses: [{ verse: 2 }] }, end: { chapter: 2, verses: [{ verse: 4 }] } }] }]);
+assert.deepEqual(ssrl.parse('1 Corinthians 3:6, 7, 9'), [{ number: 1, book: 'Corinthians', chapters: [{ chapter: 3, verses: [{ verse: 6 }, { verse: 7 }, { verse: 9 }] }]}]);
+assert.deepEqual(ssrl.parse('1 Corinthians 9:20-23'), [{ number: 1, book: 'Corinthians', chapters: [{ chapter: 9, verses: [{ start: { verse: 20 }, end: { verse: 23 }}] }] }]);
+assert.deepEqual(ssrl.parse('Micah 6:8; 1 Corinthians 10:31'), [{ book: 'Micah', chapters: [{ chapter: 6, verses: [{ verse: 8 }] }] }, { number: 1, book: 'Corinthians', chapters: [{ chapter: 10, verses: [{ verse: 31 }] }] }]);
 assert.deepEqual(ssrl.parse('Revelation 2:10; 7:3, 14'), [{ book: 'Revelation', chapters: [{ chapter: 2, verses: [{ verse: 10 }] }, { chapter: 7, verses: [{ verse: 3 }, { verse: 14 }] }] }]);
+assert.deepEqual(ssrl.parse('1Ti. 3:1'), [{ number: 1, book: 'Ti.', chapters: [{ chapter: 3, verses: [{ verse: 1 }] }] } ]);
 
 console.log('success!');
 function print(v) {

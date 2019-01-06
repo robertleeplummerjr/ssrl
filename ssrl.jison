@@ -8,8 +8,6 @@
 %%
 [\s]+
   { /*skip whitespace*/ }
-[0-4][\s]+[a-zA-Z]+[.]?
-  return 'NAME'
 [a-zA-Z]+[.]?
   return 'NAME'
 <CHAPTER>[;](?=[\s]*[0-9]+[\s]*[:])
@@ -76,7 +74,9 @@ SCRIPTURES
 
 SCRIPTURE
   : NAME CHAPTERS
-    { $$ = { book: $1, chapters: $2 } }
+    { $$ = { book: $1, chapters: $2 }; }
+  | NUMBER NAME CHAPTERS
+    { $$ = { number: parseInt($1), book: $2, chapters: $3 }; }
   ;
 
 CHAPTERS
@@ -137,3 +137,6 @@ VERSE_RANGE
   | VERSE_NUMBER VERSE_DASH VERSE_NUMBER
     { $$ = { start: { verse: parseInt($1) }, end: { verse: parseInt($3) } }; }
   ;
+
+%%
+
