@@ -69,7 +69,10 @@ SCRIPTURES
   | SCRIPTURES SEMICOLON
     { $$ = $1; }
   | SCRIPTURES SEMICOLON SCRIPTURE
-    { $$ = $1.concat($3); }
+    {
+      $1.push($3);
+      $$ = $1;
+    }
   ;
 
 SCRIPTURE
@@ -95,27 +98,57 @@ CHAPTERS
   | CHAPTERS COMMA
     { $$ = $1; }
   | CHAPTERS COMMA NUMBER
-    { $$ = $1.concat({ chapter: parseInt($3) }); }
+    {
+      $1.push({ chapter: parseInt($3) });
+      $$ = $1;
+    }
   | CHAPTERS COMMA NUMBER COLON
-    { $$ = $1.concat({ chapter: parseInt($3) }); }
+    {
+      $1.push({ chapter: parseInt($3) });
+      $$ = $1;
+    }
   | CHAPTERS COMMA NUMBER COLON VERSES
-    { $$ = $1.concat({ chapter: parseInt($3), verses: $5 }); }
+    {
+      $1.push({ chapter: parseInt($3), verses: $5 });
+      $$ = $1;
+    }
   | CHAPTERS COMMA NUMBER DASH
-    { $$ = $1.concat({ chapter: parseInt($3) }); }
+    {
+      $1.push({ chapter: parseInt($3) });
+      $$ = $1;
+    }
   | CHAPTERS COMMA NUMBER DASH NUMBER
-    { $$ = $1.concat({ start: { chapter: parseInt($3) }, end: { chapter: parseInt($5) } }); }
+    {
+      $1.push({ start: { chapter: parseInt($3) }, end: { chapter: parseInt($5) } });
+      $$ = $1;
+    }
   | CHAPTERS CHAPTER_SEMICOLON
     { $$ = $1; }
   | CHAPTERS CHAPTER_SEMICOLON NUMBER
-    { $$ = $1.concat({ chapter: parseInt($3) }); }
+    {
+      $1.push({ chapter: parseInt($3) });
+      $$ = $1;
+    }
   | CHAPTERS CHAPTER_SEMICOLON NUMBER COLON
-    { $$ = $1.concat({ chapter: parseInt($3) }); }
+    {
+      $1.push({ chapter: parseInt($3) });
+      $$ = $1;
+    }
   | CHAPTERS CHAPTER_SEMICOLON NUMBER COLON VERSES
-    { $$ = $1.concat({ chapter: parseInt($3), verses: $5 }); }
+    {
+      $1.push({ chapter: parseInt($3), verses: $5 });
+      $$ = $1;
+    }
   | CHAPTERS CHAPTER_SEMICOLON NUMBER DASH
-    { $$ = $1.concat({ chapter: parseInt($3) }); }
+    {
+      $1.push({ chapter: parseInt($3) });
+      $$ = $1;
+    }
   | CHAPTERS CHAPTER_SEMICOLON NUMBER DASH NUMBER
-    { $$ = $1.concat({ start: { chapter: parseInt($3) }, end: { chapter: parseInt($5) } }); }
+    {
+      $1.push({ start: { chapter: parseInt($3) }, end: { chapter: parseInt($5) } });
+      $$ = $1;
+    }
   ;
 
 VERSES
@@ -126,9 +159,15 @@ VERSES
   | VERSES VERSE_COMMA
     { $$ = $1; }
   | VERSES VERSE_COMMA VERSE_RANGE
-    { $$ = $1.concat($3); }
+    {
+      $1.push($3);
+      $$ = $1;
+    }
   | VERSES VERSE_COMMA VERSE_NUMBER
-    { $$ = $1.concat({ verse: parseInt($3) }); }
+    {
+      $1.push({ verse: parseInt($3) });
+      $$ = $1;
+    }
   ;
 
 VERSE_RANGE
@@ -137,6 +176,3 @@ VERSE_RANGE
   | VERSE_NUMBER VERSE_DASH VERSE_NUMBER
     { $$ = { start: { verse: parseInt($1) }, end: { verse: parseInt($3) } }; }
   ;
-
-%%
-
